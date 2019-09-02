@@ -43,6 +43,12 @@ spec:
             {{- toYaml .Values.scheduler.resources | nindent 12 }}
           env:
             {{- toYaml .Values.scheduler.env | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8787
+            initialDelaySeconds: 5
+            periodSeconds: 5
     {{- with .Values.scheduler.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

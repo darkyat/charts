@@ -45,6 +45,12 @@ spec:
           {{- if .Values.jupyter.env }}
             {{- toYaml .Values.jupyter.env | nindent 12 }}
           {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 8888
+            initialDelaySeconds: 5
+            periodSeconds: 5
       nodeSelector:
         {{- toYaml .Values.jupyter.nodeSelector | nindent 8 }}
       volumes:

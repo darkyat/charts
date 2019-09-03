@@ -10,6 +10,8 @@ metadata:
     release: {{ .Release.Name | quote }}
     chart: {{ template "dask.chart" . }}
     component: jupyter
+  annotations:
+{{ toYaml .Values.jupyter.annotations | indent 4 }}
 spec:
   ports:
     - name: {{ template "dask.fullname" . }}-jupyter
